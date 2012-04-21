@@ -28,7 +28,12 @@ tt.ui = {};
 		// create top view
 		win.add(tt.ui.createTitleView(function(image){
 			var win = tt.ui.confirm.createWindow(image);
-			tab.open(win);
+			var newTab = Ti.UI.createTab({
+				window: win
+			});
+			tabGroup.removeTab(tab);
+			tabGroup.addTab(newTab);
+			//tab.open(win);
 			//win.open();
 		}));
 		
@@ -113,5 +118,6 @@ Ti.include(
 	'/app/ui/register.js',
 	'/app/ui/confirm.js',
 	'/app/ui/itemSearch.js',
-	'/app/ui/searchStart.js'
+	'/app/ui/searchStart.js',
+	'/app/ui/comment.js'
 );

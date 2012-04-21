@@ -43,12 +43,26 @@ tt.ui.itemSearch = {};
 			}
 		});
 		
+		var nextButton = Ti.UI.createButton({
+			title: "Next",
+			width: 40,
+			height: 20,
+			top:70,
+			right: 20
+		});
+		nextButton.addEventListener('click', function(){
+			var nextWin = tt.ui.comment.createWindow();
+			tt.ui.topTabGroup.getActiveTab().open(nextWin);
+		});
+		nextButton.setVisible(false);
+		
 		// set iten name label as a global variables
 		tt.ui.itemSearch.itemNameLabel = label;
+		tt.ui.itemSearch.nextButton = nextButton;
 		
 		view.add(label);
-    	
     	view.add(tt.ui.itemSearch.createImageView(image));
+    	view.add(nextButton);
     	
     	return view;
     }
@@ -76,8 +90,6 @@ tt.ui.itemSearch = {};
         var view = Ti.UI.createScrollView({
             layout: 'vertical',
             top:100,
- //           height: 'auto',
-   //         width: 'auto',
             showVerticalScrollIndicator:true,
         	contentWidth:'auto',
     		contentHeight:'auto'
@@ -136,6 +148,7 @@ tt.ui.itemSearch = {};
         
         itemView.addEventListener('click', function(){
         	tt.ui.itemSearch.itemNameLabel.setText(item.itemName);
+        	tt.ui.itemSearch.nextButton.setVisible(true);
         });
         
         return itemView;
