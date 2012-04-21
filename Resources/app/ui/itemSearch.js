@@ -81,7 +81,6 @@ tt.ui.itemSearch = {};
         });
         
         view.add(tt.ui.itemSearch.createSearchBar());
-        
         view.add(tt.ui.itemSearch.createSearchResultView());
 
         return view;
@@ -95,9 +94,11 @@ tt.ui.itemSearch = {};
     		contentHeight:'auto'
     	});
     	
-    	['商品名１', '商品名２', '商品名３','商品名４', '商品名５', '商品名６'].forEach(function(itemName){
+    	['商品名１'].forEach(function(itemName){
         	scrollView.add(tt.ui.itemSearch.createItemView(itemName));
         });
+        
+        tt.ui.itemSearch.searchView = scrollView;
         
         return scrollView;
     }
@@ -129,6 +130,21 @@ tt.ui.itemSearch = {};
 	        barColor:'#000', 
 	        showCancel:true,
 	        height:40,
+		});
+		
+		searchBar.addEventListener('return', function(event){
+			var model = tt.model.itemSearch.createModel(event.value);
+			model.load(function(json){
+				var items = json.Body.ItemSearch.Items.Item;
+				items.forEach(function(item){
+					tt.ui.itemSearch.searchView.add(tt.ui.itemSearch.createItemView(item.itemName));
+				});
+			});
+			searchBar.blur();
+		});
+		// cancelボタンクリック時イベント
+		searchBar.addEventListener('cancel', function(e){
+		        searchBar.blur();
 		});
 		
 		return searchBar;

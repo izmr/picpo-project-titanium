@@ -28,6 +28,7 @@ tt.util.camera = {};
                 var image = Ti.Filesystem.getFile("/Users/marimofire/workspace/titanium/Sample20120419/Resources/iphone/Default.png");
                 callback(image.read());
 			},
+			cancel: function(event) {},
 			saveToPhotoGallery: true,
 			allowEditing: true,
 			mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO]
