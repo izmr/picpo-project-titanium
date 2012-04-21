@@ -39,7 +39,7 @@ tt.ui.confirm = {};
 			},
 			//width: 500,
 			height: 'auto',
-			top: 50
+			top: 20
 		});
 		
 		// the camera image
@@ -48,7 +48,7 @@ tt.ui.confirm = {};
 		// the ng button
 		var ngButton = Ti.UI.createButton({
 			title: "NG",
-			top: 320,
+			top: 270,
 			left: 100
 		});
 		
@@ -60,7 +60,7 @@ tt.ui.confirm = {};
 		// the ok button
 		var okButton = Ti.UI.createButton({
 			title: "OK",
-			top: 320,
+			top: 270,
 			right: 100
 		});
 		
@@ -86,7 +86,7 @@ tt.ui.confirm = {};
 		var view = Ti.UI.createImageView({
 			width: 200,
 			height: 200,
-			top: 100,
+			top: 50,
 			image: image
 		});
 		
