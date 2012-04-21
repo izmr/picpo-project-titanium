@@ -101,7 +101,7 @@ tt.ui.itemSearch = {};
     	});
     	
     	items.forEach(function(item){
-        	scrollView.add(tt.ui.itemSearch.createItemView(item.itemName));
+        	scrollView.add(tt.ui.itemSearch.createItemView(item));
         });
         
         tt.ui.itemSearch.searchResultView = scrollView;
@@ -109,23 +109,33 @@ tt.ui.itemSearch = {};
         return scrollView;
     }
     
-    tt.ui.itemSearch.createItemView = function(itemName) {
+    tt.ui.itemSearch.createItemView = function(item) {
     	var itemView = Ti.UI.createView({
         	height: 50,
         	width: 'auto',
-        	top: 5
+        	top: 5,
+        	layout: 'horizontal'
+        });
+        
+        var itemImageView = Ti.UI.createImageView({
+        	image: item.smallImageUrl,
+        	height: 40,
+        	left: 5
         });
         
         var itemNameLabel = Ti.UI.createLabel({
-        	text: itemName,
+        	text: item.itemName,
         	width: 'auto',
-        	left: 10
+        	font: {
+        		fontSize: 10
+        	}
         });
         
+        itemView.add(itemImageView);
         itemView.add(itemNameLabel);
         
         itemView.addEventListener('click', function(){
-        	tt.ui.itemSearch.itemNameLabel.setText(itemName);
+        	tt.ui.itemSearch.itemNameLabel.setText(item.itemName);
         });
         
         return itemView;
