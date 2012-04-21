@@ -26,5 +26,6 @@ tt.model = {};
 Ti.include(
 	'/app/model/config.js',
 	'/app/model/itemSearch.js',
-	'/app/model/register.js'
+	'/app/model/register.js',
+	'/app/model/facebook.js'
 );

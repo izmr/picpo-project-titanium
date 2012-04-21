@@ -1,18 +1,11 @@
 tt = {}; // Top level namespace
-config = {}; // Global config namespace
 
 /**
  * main logic
  * @author Izumori Tatsuya <tatsuya.izumori@gmail.com>
  */
 (function() {
-	tt.login = {data:null};
-	tt.login.setData = function(data) {
-		
-	};
-	tt.login.getData = function() {
-		
-	};
+	
 })();
 
 /**

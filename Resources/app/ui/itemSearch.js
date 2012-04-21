@@ -6,7 +6,15 @@ tt.ui.itemSearch = {};
  * @author YUya, Kakui <y.kakui@gmail.com>
  */
 (function(){
+	tt.ui.itemSearch.itemImageContainer = {
+		image: null,
+		item: null,
+		comment: ''
+	};
+	
     tt.ui.itemSearch.createWindow = function(image) {
+    	tt.ui.itemSearch.itemImageContainer.image = image;
+    	
         var win = tt.ui.createModalWindow({
             title: 'Item Search',
             layout: 'vertical'
@@ -51,7 +59,7 @@ tt.ui.itemSearch = {};
 			right: 20
 		});
 		nextButton.addEventListener('click', function(){
-			var nextWin = tt.ui.comment.createWindow();
+			var nextWin = tt.ui.comment.createWindow(tt.ui.itemSearch.itemImageContainer);
 			tt.ui.topTabGroup.getActiveTab().open(nextWin);
 		});
 		nextButton.setVisible(false);
@@ -147,6 +155,7 @@ tt.ui.itemSearch = {};
         itemView.add(itemNameLabel);
         
         itemView.addEventListener('click', function(){
+        	tt.ui.itemSearch.itemImageContainer.item = item;
         	tt.ui.itemSearch.itemNameLabel.setText(item.itemName);
         	tt.ui.itemSearch.nextButton.setVisible(true);
         });
