@@ -11,9 +11,12 @@ tt.ui.itemSearch = {};
             title: 'Item Search',
             layout: 'vertical'
         });
+        
+        var searchView = tt.ui.itemSearch.createSearchView();
+		tt.ui.itemSearch.searchView = searchView;
 
 		win.add(tt.ui.itemSearch.createTopView(image));
-        win.add(tt.ui.itemSearch.createSearchView());
+        win.add(searchView);
 
         return win;
     }
@@ -80,13 +83,16 @@ tt.ui.itemSearch = {};
     		contentHeight:'auto'
         });
         
+        // at first the search result view will show empty item list.        
         view.add(tt.ui.itemSearch.createSearchBar());
-        view.add(tt.ui.itemSearch.createSearchResultView());
+        view.add(tt.ui.itemSearch.createSearchResultView([]));
 
         return view;
     }
     
-    tt.ui.itemSearch.createSearchResultView = function() {
+    tt.ui.itemSearch.createSearchResultView = function(items) {
+    	items = items || [];
+    	
     	var scrollView = Ti.UI.createScrollView({
     		layout: 'vertical',
             showVerticalScrollIndicator:true,
@@ -94,11 +100,11 @@ tt.ui.itemSearch = {};
     		contentHeight:'auto'
     	});
     	
-    	['商品名１'].forEach(function(itemName){
-        	scrollView.add(tt.ui.itemSearch.createItemView(itemName));
+    	items.forEach(function(item){
+        	scrollView.add(tt.ui.itemSearch.createItemView(item.itemName));
         });
         
-        tt.ui.itemSearch.searchView = scrollView;
+        tt.ui.itemSearch.searchResultView = scrollView;
         
         return scrollView;
     }
@@ -136,12 +142,12 @@ tt.ui.itemSearch = {};
 			var model = tt.model.itemSearch.createModel(event.value);
 			model.load(function(json){
 				var items = json.Body.ItemSearch.Items.Item;
-				items.forEach(function(item){
-					tt.ui.itemSearch.searchView.add(tt.ui.itemSearch.createItemView(item.itemName));
-				});
+				tt.ui.itemSearch.searchView.remove(tt.ui.itemSearch.searchResultView);
+				tt.ui.itemSearch.searchView.add(tt.ui.itemSearch.createSearchResultView(items))
 			});
 			searchBar.blur();
 		});
+		
 		// cancelボタンクリック時イベント
 		searchBar.addEventListener('cancel', function(e){
 		        searchBar.blur();
