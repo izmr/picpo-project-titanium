@@ -16,8 +16,8 @@ tt.util.camera = {};
 			 * @param {Object} event
 			 */
 			success: function(event) {
-				//var image = event.media;
-				var image = "/iphone/Default.png";
+				var image = event.media;
+				//var image = "/iphone/Default.png";
 				callback(image);
 			},
 			
@@ -25,14 +25,17 @@ tt.util.camera = {};
 			 * When you cannot use your camera
 			 * @param {Object} error
 			 */
-			error: function (error) {				
-                //var image = Ti.Filesystem.getFile("/Users/marimofire/workspace/titanium/Sample20120419/Resources/iphone/Default.png");
-                //callback(image.read());
-                var image = "/iphone/Default.png";
-				callback(image);
+			error: function (error) {
+				alert("Camera Error: " + error.code);
+                var image = Ti.Filesystem.getFile("/Users/marimofire/workspace/titanium/Sample20120419/Resources/iphone/Default.png");
+                callback(image.read());
+                // var image = "/android/default.png";
+				// callback(image);
 			},
-			cancel: function(event) {},
-			saveToPhotoGallery: false,
+			cancel: function(event) {
+				
+			},
+			saveToPhotoGallery: true,
 			allowEditing: true,
 			mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO]
 		});

@@ -25,16 +25,19 @@ tt.ui = {};
 		var tabGroup = Ti.UI.createTabGroup();
 		tabGroup.addTab(tab);
 		
-		// create top view
+		/**
+		 * Show title view and define a behavior when take a photo
+		 * !!! Maybe an error occur around here !!!
+		 */
 		win.add(tt.ui.createTitleView(function(image){
 			var win = tt.ui.confirm.createWindow(image);
+			//win.open();
+			
 			var newTab = Ti.UI.createTab({
 				window: win
 			});
 			tabGroup.removeTab(tab);
 			tabGroup.addTab(newTab);
-			//tab.open(win);
-			//win.open();
 		}));
 		
 		// set tabGroup as global variables 
@@ -63,8 +66,7 @@ tt.ui = {};
 			width: 'auto',
 			color: '#F00',
 			height: 'auto',
-			top: 100 // relative position(vertical)
-			//top: 100 // absolute position
+			top: 100
 		});
 		
 		var cameraButton = Ti.UI.createButton({
