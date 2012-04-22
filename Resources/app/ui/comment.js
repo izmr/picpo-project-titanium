@@ -20,10 +20,6 @@ tt.ui.comment = {};
 		} else {
 			tt.ui.comment.coverComment();
 		}
-		// test
-		loginView.addEventListener('click', function(){
-			win.remove(tt.ui.comment.blankCoverView);
-		})
 		
 		return tt.ui.comment.win;
 	}
